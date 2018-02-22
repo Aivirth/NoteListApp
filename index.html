@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Simple note App</title>
+</head>
+<body>
+
+<div id="app-title" class="columns ">
+    <div class="column is-half is-offset-one-quarter box">
+        <h1 class=" has-text-centered title is-3">Simple Note app</h1>
+        <h6 class=" has-text-centered title is-6 tags">
+            <span class="tag is-info">Webpack</span>
+            <span class="tag is-info">FetchAPI</span>
+            <span class="tag is-info">BulmaCSS</span>
+            <span class="tag is-info">Json Server</span>
+        </h6>
+    </div>
+</div>
+    
+
+
+<div class="columns">
+    <!-- form -->
+    <div class="column is-half is-offset-one-quarter">
+
+        <div class="field">
+            <label for="title" class="label">Title</label>
+            <div class="control">
+                <input id="noteTitle" class="input" type="text" placeholder="Text">
+            </div>                
+        </div>
+        <div class="field">
+            <label for="author" class="label">Author</label>
+            <div class="control">
+                <input id="noteTitle" class="input" type="text" placeholder="Author">
+            </div>                
+        </div>
+
+        <div class="field">
+            <label for="title" class="label">Body</label>
+            <div class="control">
+                <textarea id="noteBody" class="textarea" placeholder="Note text"></textarea>
+            </div>                
+        </div>
+
+        <div class="buttons">
+            <button class="button is-success">
+                <span>Add note </span>
+                <span class="icon"><i class="fas fa-plus-square"></i></span>
+            </button>
+            <button class="button is-danger">
+                <span>Delete All</span> 
+                <span class="icon"><i class="fas fa-eraser"></i></span>
+            </button>
+        </div>
+
+    </div>
+</div>
+<div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+        <h4 class="title is-4 has-text-centered has-text-primary">Notes <i class="fas fa-tasks"></i></h4>
+     
+        <!-- Notifications -->
+        <div class="notification is-success">
+                <button class="delete"></button>
+                Primar lorem ipsum dolor sit amet, consectetur
+        </div>
+
+    <!-- List items-->
+        <ul id="notes-container">
+            <li>
+                <div id="note-1" class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Note Title</p> 
+
+                        <a href="#" class="confirm-operation card-header-icon" aria-label="cancel operation">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                        </a>
+                        <a href="#" class="cancel-operation card-header-icon" aria-label="cancel operation">
+                            <span class="icon"><i class="fas fa-undo"></i></span>
+                        </a>
+
+                        <a href="#" class="edit-note card-header-icon" aria-label="edit note">
+                            <span class="icon"><i class="far fa-edit"></i></span>
+                        </a>  
+                        <a href="#" class="delete-note card-header-icon" aria-label="delete note">
+                            <span class="icon"><i class="fas fa-trash"></i></span>
+                        </a>
+
+                    </header>
+                    <div class="card-content">
+                        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</div>
+                    </div>
+                    <footer class="card-footer has-text-grey has-text-left">
+                        <p class="note-author card-footer-item">By: Aivirth</p>
+                    </footer>
+                </div>
+            </li>
+
+            <li>
+                <div id="note-2" class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Simulated standard state</p> 
+                        
+                        <a href="#" class="edit-note card-header-icon" aria-label="edit note">
+                            <span class="icon"><i class="far fa-edit"></i></span>
+                        </a>  
+                        <a href="#" class="delete-note card-header-icon" aria-label="delete note">
+                            <span class="icon"><i class="fas fa-trash"></i></span>
+                        </a>
+
+                    </header>
+                    <div class="card-content">
+                        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</div>
+                    </div>
+                    <footer class="card-footer has-text-grey has-text-left">
+                        <p class="note-author card-footer-item">By: Aivirth</p>
+                    </footer>
+                </div>
+            </li>
+            <li>
+                <div id="note-3" class="card">
+                    <header class="card-header">
+                        <p class="card-header-title"><input class="input title-edit-state" type="text" value="Simulated Edit state"></p> 
+
+                        <a href="#" class="confirm-operation card-header-icon" aria-label="cancel operation">
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                        </a>
+                        <a href="#" class="cancel-operation card-header-icon" aria-label="cancel operation">
+                            <span class="icon"><i class="fas fa-undo"></i></span>
+                        </a>
+
+                    </header>
+                    <div class="card-content">
+                        <div class="content"> 
+                            <textarea class="textarea body-edit-state">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</textarea>
+                        </div>
+                    </div>
+                    <footer class="card-footer has-text-grey has-text-left">
+                        <p class="note-author card-footer-item">By: Aivirth</p>
+                    </footer>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    
+</div>
+
+    
+    
+    
+
+
+</body>
+</html>
