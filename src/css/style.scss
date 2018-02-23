@@ -1,0 +1,25 @@
+@import 'colors';
+
+body{
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+#notes-container {
+    .card{
+        margin-bottom:25px; 
+    }
+}
+
+#app-title{
+    margin:15px 0 25px 0;    
+}
+#app-title {
+    > .box{
+        padding : 15px;
+    }
+}
+
+.card-header-title{
+    padding: .75em 1.5em;
+}
