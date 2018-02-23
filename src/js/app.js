@@ -28,6 +28,8 @@ function addNote(){
     //create note
     http.post('http://localhost:3000/notes', data)
         .then(data => {
+            ui.showAlert('Note Added Successfully', "notification is-success");
+            ui.clearFields();
             getNotes();
         })
         .catch(err => console.log(err));
