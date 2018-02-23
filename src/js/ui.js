@@ -16,7 +16,7 @@ class UI{
                 <div id="note-${note.id}" class="card">
                     <header class="card-header">
                         <p class="card-header-title">${note.title}</p>
-                        <a href="#" class="edit-note card-header-icon" aria-label="edit note">
+                        <a href="#" data-id="${note.id}" class="edit-note card-header-icon" aria-label="edit note">
                             <span class="icon"><i class="far fa-edit"></i></span>
                         </a>  
                         <a href="#" class="delete-note card-header-icon" aria-label="delete note">
