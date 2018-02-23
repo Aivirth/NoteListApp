@@ -1,26 +1,12 @@
 import '../css/style.scss'
 import {http} from './httplibrary';
+import {ui} from './ui';
 
-/*
-http.get('https://jsonplaceholder.typicode.com/users')
-    .then(data =>console.log(data))
-    .catch(err => console.log(err));
-*/
+//get notes on DOMLOAD
+document.addEventListener('DOMContentLoaded', getNotes);
 
-const data = {
-    name : 'john doe',
-    username : 'johndoe',
-    email :'text@test.com'
+function getNotes(){
+    http.get('http://localhost:3000/notes')
+        .then(data => ui.showNotes(data))
+        .catch(err => console.log(err));
 }
-
-/*
-http.post('https://jsonplaceholder.typicode.com/users', data)
-    .then(data =>console.log(data))
-    .catch(err => console.log(err));
-*/
-
-/*
-http.put('https://jsonplaceholder.typicode.com/users/1', data)
-    .then(data =>console.log(data))
-    .catch(err => console.log(err));
-*/
