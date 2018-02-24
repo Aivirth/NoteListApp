@@ -5,7 +5,7 @@ class UI{
         this._authorInput = document.querySelector('#noteAuthor');
         this._bodyInput = document.querySelector('#noteBody');
         this._idInput = document.querySelector('#id');
-        this._formState = 'add';
+        this._noteState = 'add';
     }
 
     showNotes(notes){
@@ -87,7 +87,7 @@ class UI{
         //convert noteList to array
         noteList = Array.from(noteList);
 
-        console.log(data);
+        //console.log(data);
 
         //look for the post with the id equal to data.id
         noteList.forEach((currentNote)=>{
@@ -108,12 +108,69 @@ class UI{
                 data.bodyContainer.innerHTML = `
                 <textarea class="textarea body-edit-state">${data.bodyContainer.textContent}</textarea>
                 `;
+
+
+
+            // Change note status to edit mode              
+            this._noteState = 'edit';
+
+            this.cardButtonsController(this._noteState, currentNoteID);
             }
-            
-            
-            
-            
         });
+
+        
+    }
+
+    //Swap buttons according to card state
+    cardButtonsController(noteState, noteID){
+        if(noteState === 'edit'){
+            //get current card elements
+            let cardElements = document.getElementById(`note-${noteID}`).children;
+            //convert elements to array
+            cardElements = Array.from(cardElements);
+
+            //get the header of the card
+            let header = cardElements[0];
+
+            //get header elements
+            let headerElements = header.children;
+            //convert elements to array
+            headerElements = Array.from(headerElements);
+
+            //remove add state btn
+            let firstBtn = headerElements[1].remove();
+            let secondBtn = headerElements[2].remove();
+
+            //create confirm edit btn
+            const confirmBtn = document.createElement('a');
+            confirmBtn.className = "confirm-operation card-header-icon";
+            confirmBtn.dataset.label = "confirm operation";
+                //btn confirm icon
+                const confirmIcon = document.createElement('span');
+                confirmIcon.className = "icon";
+                confirmIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+
+            confirmBtn.appendChild(confirmIcon);            
+            
+            //create cancel edit btn
+            const cancelBtn = document.createElement('a');
+            cancelBtn.className = "cancel-operation card-header-icon";
+            cancelBtn.dataset.label = "cancel operation";
+                //btn confirm icon
+                const cancelIcon = document.createElement('span');
+                cancelIcon.className = "icon";
+                cancelIcon.innerHTML = '<i class="fas fa-undo"></i>';
+
+            cancelBtn.appendChild(cancelIcon);
+
+            //append edit state buttons to note
+            header.appendChild(confirmBtn);
+            header.appendChild(cancelBtn);
+
+
+            //console.log(firstBtn, secondBtn);
+            
+        }
     }
 }
 
