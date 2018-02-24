@@ -6,6 +6,8 @@ import {ui} from './ui';
 document.addEventListener('DOMContentLoaded', getNotes);
 //listen for add note
 document.querySelector('.add-note').addEventListener('click', addNote);
+//listen for edit state
+document.querySelector('#notes-container').addEventListener('click', enableEdit);
 
 
 function getNotes(){
@@ -33,4 +35,37 @@ function addNote(){
             getNotes();
         })
         .catch(err => console.log(err));
+}
+
+
+//Enable edit state
+function enableEdit(e){
+    
+    if(e.target.parentElement.parentElement.classList.contains('edit-note')){
+        const id = parseInt(e.target.parentElement.parentElement.dataset.id);
+        const title = e.target.parentElement.parentElement.previousElementSibling.textContent;
+        const body = e.target.parentElement.parentElement.parentElement.nextElementSibling.children[0].textContent;
+        const author = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[0].textContent;
+
+        const data = {
+            id, title, body, author
+        }
+
+        //Tests
+        const idContainer = e.target.parentElement.parentElement;
+        const titleContainer = e.target.parentElement.parentElement.previousElementSibling;
+        const bodyContainer = e.target.parentElement.parentElement.parentElement.nextElementSibling.children[0];
+        const authorContainer = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[0];
+
+        const dataContainers = {
+            idContainer,
+            titleContainer,
+            bodyContainer,
+            authorContainer
+        }
+
+        ui.editState(dataContainers);
+    }
+    
+    e.preventDefault();
 }
