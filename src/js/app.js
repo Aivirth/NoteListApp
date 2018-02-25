@@ -29,22 +29,14 @@ function deleteAllNotes(e){
             cardID = cardID[1];
 
             http.delete(`http://localhost:3000/notes/${cardID}`)
-                .then(() => {
-                    getNotes();
-                })
-                .catch(err => console.log(err));  
-
-            ui.showAlert('Notes deleted successfully', 'notification is-danger');
-            
-        });
-
-       
+                .then((res) => { console.log(res) })
+                .catch(err => console.log(err));
+        });     
         
     }
     
-    
-   
-
+    location.reload();
+    ui.showAlert('Notes deleted successfully', 'notification is-danger');
     
 
     e.preventDefault();
