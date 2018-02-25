@@ -19,7 +19,7 @@ class UI{
                         <a href="#" data-id="${note.id}" class="edit-note card-header-icon" aria-label="edit note">
                             <span class="icon"><i class="far fa-edit"></i></span>
                         </a>  
-                        <a href="#" class="delete-note card-header-icon" aria-label="delete note">
+                        <a href="#" data-id="${note.id}" class="delete-note card-header-icon" aria-label="delete note">
                             <span class="icon"><i class="fas fa-trash"></i></span>
                         </a>
                     </header>
@@ -81,45 +81,6 @@ class UI{
         this._bodyInput.value = '';
     }
 
-    editState(data){
-        //get all notes 
-        let noteList = document.querySelectorAll('.note-card');
-        //convert noteList to array
-        noteList = Array.from(noteList);
-
-        //console.log(data);
-
-        //look for the post with the id equal to data.id
-        noteList.forEach((currentNote)=>{
-            //get note id
-            let currentNoteID = currentNote.id;
-            //filter id number from id name
-            currentNoteID = parseInt(currentNoteID.split('-')[1]);
-            
-            //match current node id with data id
-            if(currentNoteID === parseInt(data.idContainer.dataset.id)){
-
-                //change title into a input field
-                data.titleContainer.innerHTML = `
-                <input class="input title-edit-state" type="text" value="${data.titleContainer.textContent}">
-                `;
-
-                //change body into a textarea field
-                data.bodyContainer.innerHTML = `
-                <textarea class="textarea body-edit-state">${data.bodyContainer.textContent}</textarea>
-                `;
-
-
-
-            // Change note status to edit mode              
-            this._noteState = 'edit';
-
-            this.cardButtonsController(this._noteState, currentNoteID);
-            }
-        });
-
-        
-    }
 
     //remove current buttons in the card state and return card header
     clearBtns(noteID){
@@ -138,11 +99,12 @@ class UI{
     }
 
     //Creates Action actor
-    editActorCreator(className, dataSet, innerHtml){
+    editActorCreator(dataId, className, dataSet, innerHtml){
         
         const actionBtn = document.createElement('a');
             actionBtn.className = className;
-            actionBtn.dataset.label = dataSet;        
+            actionBtn.dataset.label = dataSet;
+            actionBtn.dataset.id = dataId;        
             actionBtn.innerHTML = innerHtml;   
 
         return actionBtn;
@@ -156,10 +118,18 @@ class UI{
 
         if(noteState === 'edit'){
             //create confirm edit btn
-            const confirmBtn = this.editActorCreator('confirm-operation card-header-icon', 'confirm operation' , '<span class="icon"><i class="fas fa-check-circle"></i></span>');
+            const confirmBtn = this.editActorCreator(
+                noteID,
+                'confirm-operation card-header-icon', 
+                'confirm operation' , 
+                '<span class="icon"><i class="fas fa-check-circle"></i></span>');
             
             //create cancel edit btn 
-            const cancelBtn = this.editActorCreator('cancel-operation card-header-icon', 'cancel operation' , '<span class="icon"><i class="fas fa-undo"></i></span>');
+            const cancelBtn = this.editActorCreator(
+                noteID,
+            'cancel-operation card-header-icon', 
+            'cancel operation' , 
+            '<span class="icon"><i class="fas fa-undo"></i></span>');
 
             //append edit state buttons to note            
             header.appendChild(confirmBtn);
@@ -167,16 +137,64 @@ class UI{
                      
         }else{
             //create edit btn
-            const editBtn = this.editActorCreator('delete-note card-header-icon', 'delete note', '<span class="icon"><i class="fas fa-trash"></i></span>');
+            const editBtn = this.editActorCreator(
+                noteID,
+                'edit-note card-header-icon', 
+                'edit note', 
+                '<span class="icon"><i class="far fa-edit"></i></span>');
             
             //create cancel edit btn
-            const deleteBtn = this.editActorCreator('delete-note card-header-icon', 'delete note', '<span class="icon"><i class="fas fa-trash"></i></span>');
+            const deleteBtn = this.editActorCreator(
+                noteID,
+                'delete-note card-header-icon', 
+                'delete note', 
+                '<span class="icon"><i class="fas fa-trash"></i></span>');
 
             //append edit state buttons to note            
             header.appendChild(editBtn);
             header.appendChild(deleteBtn);  
                     
         } 
+    }
+
+    //cancel edit state
+    cancelEditState(containers, data){
+
+
+        //get id of note through dataset
+        let currentNoteID = data.id;
+
+        //revert edit state fields to normal
+        containers.titleContainer.innerHTML = data.title;
+        containers.bodyContainer.innerHTML = data.body;        
+
+        // Change note status to edit mode              
+        this._noteState = 'add';
+        this.cardButtonsController(this._noteState, currentNoteID);
+
+    }
+
+
+    editState(data){
+
+        
+        //get id of note through dataset
+        let currentNoteID = data.idContainer.dataset.id;
+        
+        //change title into a input field
+        data.titleContainer.innerHTML = `
+        <input class="input title-edit-state" type="text" value="${data.titleContainer.textContent}">
+        `;
+
+        //change body into a textarea field
+        data.bodyContainer.innerHTML = `
+        <textarea class="textarea body-edit-state">${data.bodyContainer.textContent}</textarea>
+        `;
+        // Change note status to edit mode              
+        this._noteState = 'edit';
+        this.cardButtonsController(this._noteState, currentNoteID); 
+        
+        
     }
 }
 
