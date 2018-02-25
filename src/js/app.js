@@ -10,6 +10,8 @@ document.querySelector('.add-note').addEventListener('click', addNote);
 document.querySelector('#notes-container').addEventListener('click', enableEdit);
 //listen for cancel edit state
 document.querySelector('#notes-container').addEventListener('click', cancelEdit);
+//listen of submit changes
+document.querySelector('#notes-container').addEventListener('click', submitEdit);
 
 
 function getNotes(){
@@ -44,18 +46,6 @@ function addNote(){
 function enableEdit(e){
     
     if(e.target.parentElement.parentElement.classList.contains('edit-note')){
-        /*
-        const id = parseInt(e.target.parentElement.parentElement.dataset.id);
-        const title = e.target.parentElement.parentElement.previousElementSibling.textContent;
-        const body = e.target.parentElement.parentElement.parentElement.nextElementSibling.children[0].textContent;
-        const author = e.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[0].textContent;
-
-        const data = {
-            id, title, body, author
-        }
-        */
-
-        //Tests
         const idContainer = e.target.parentElement.parentElement;
         const titleContainer = idContainer.previousElementSibling;
         const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
@@ -77,8 +67,6 @@ function enableEdit(e){
 function cancelEdit(e){
     if(e.target.parentElement.parentElement.classList.contains('cancel-operation')){
 
-
-
         const idContainer = e.target.parentElement.parentElement;
         const titleContainer = idContainer.previousElementSibling.previousElementSibling;
         const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
@@ -93,10 +81,45 @@ function cancelEdit(e){
 
         http.get(`http://localhost:3000/notes/${idContainer.dataset.id}`)
             .then(data => ui.cancelEditState(dataContainers, data))
-            .catch(err => console.log(err));
-
-        
+            .catch(err => console.log(err));        
     }
 
     e.preventDefault();
+}
+
+
+function submitEdit(e){
+    e.preventDefault();
+    if(e.target.parentElement.parentElement.classList.contains('confirm-operation')){
+
+        const idContainer = e.target.parentElement.parentElement;
+        const titleContainer = idContainer.previousElementSibling;
+        const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
+        const authorContainer = idContainer.parentElement.nextElementSibling.nextElementSibling.children[0];
+
+        const dataContainers = {
+            idContainer,
+            titleContainer,
+            bodyContainer,
+            authorContainer
+        }
+        
+        const id = idContainer.dataset.id;
+        const title = titleContainer.firstElementChild.value;
+        const body = bodyContainer.firstElementChild.value;
+        const author = authorContainer.textContent;
+
+        const data = {
+            id, title, body, author
+        }
+
+        //const currentCard = document.getElementById(`note-${idContainer.dataset.id}`);       
+        
+        http.put(`http://localhost:3000/notes/${id}`, data)
+            .then(() => {
+                ui.showAlert('Note edited successfully', 'notification is-success');
+                getNotes();
+            })
+            .catch(err => console.log(err));  
+    }
 }

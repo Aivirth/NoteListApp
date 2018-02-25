@@ -2,14 +2,14 @@
   "notes": [
     {
       "id": 1,
-      "title": "Note 1",
-      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes. ",
-      "author": "Aivirth"
+      "title": "Edited note",
+      "body": "test",
+      "author": "By: Aivirth"
     },
     {
       "id": 2,
       "title": "Note 2",
-      "body": "Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.  ",
+      "body": "Sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.",
       "author": "Aivirth"
     },
     {

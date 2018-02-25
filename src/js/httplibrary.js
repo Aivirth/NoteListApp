@@ -41,7 +41,7 @@ class HTTP{
         })        
     }
     //make http delete request
-    put(url){
+    delete(url){
         return new Promise((resolve, reject)=>{
             fetch(url, {
                 method : 'DELETE',
