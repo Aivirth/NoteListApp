@@ -137,6 +137,17 @@ class UI{
         return header;
     }
 
+    //Creates Action actor
+    editActorCreator(className, dataSet, innerHtml){
+        
+        const actionBtn = document.createElement('a');
+            actionBtn.className = className;
+            actionBtn.dataset.label = dataSet;        
+            actionBtn.innerHTML = innerHtml;   
+
+        return actionBtn;
+    }
+
 
     //Swap buttons according to card state
     cardButtonsController(noteState, noteID){
@@ -145,43 +156,27 @@ class UI{
 
         if(noteState === 'edit'){
             //create confirm edit btn
-            const confirmBtn = document.createElement('a');
-            confirmBtn.className = "confirm-operation card-header-icon";
-            confirmBtn.dataset.label = "confirm operation";
-
-            //btn confirm icon
-            confirmBtn.innerHTML = '<span class="icon"><i class="fas fa-check-circle"></i></span>';         
+            const confirmBtn = this.editActorCreator('confirm-operation card-header-icon', 'confirm operation' , '<span class="icon"><i class="fas fa-check-circle"></i></span>');
             
-            //create cancel edit btn
-            const cancelBtn = document.createElement('a');
-            cancelBtn.className = "cancel-operation card-header-icon";
-            cancelBtn.dataset.label = "cancel operation";
-            //btn confirm icon
-            cancelBtn.innerHTML = '<span class="icon"><i class="fas fa-undo"></i></span>';
+            //create cancel edit btn 
+            const cancelBtn = this.editActorCreator('cancel-operation card-header-icon', 'cancel operation' , '<span class="icon"><i class="fas fa-undo"></i></span>');
 
-            //append edit state buttons to note
+            //append edit state buttons to note            
             header.appendChild(confirmBtn);
-            header.appendChild(cancelBtn);            
+            header.appendChild(cancelBtn);  
+                     
         }else{
             //create edit btn
-            const editBtn = document.createElement('a');
-            editBtn.className = "edit-note card-header-icon";
-            editBtn.dataset.label = "edit note";
-
-            //btn confirm icon
-            editBtn.innerHTML = '<span class="icon"><i class="far fa-edit"></i></span>';         
+            const editBtn = this.editActorCreator('delete-note card-header-icon', 'delete note', '<span class="icon"><i class="fas fa-trash"></i></span>');
             
             //create cancel edit btn
-            const deleteBtn = document.createElement('a');
-            deleteBtn.className = "delete-note card-header-icon";
-            deleteBtn.dataset.label = "delete note";
-            //btn confirm icon
-            deleteBtn.innerHTML = '<span class="icon"><i class="fas fa-trash"></i></span>';
+            const deleteBtn = this.editActorCreator('delete-note card-header-icon', 'delete note', '<span class="icon"><i class="fas fa-trash"></i></span>');
 
-            //append edit state buttons to note
+            //append edit state buttons to note            
             header.appendChild(editBtn);
-            header.appendChild(deleteBtn);            
-        }
+            header.appendChild(deleteBtn);  
+                    
+        } 
     }
 }
 
