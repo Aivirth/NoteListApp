@@ -10,8 +10,10 @@ document.querySelector('.add-note').addEventListener('click', addNote);
 document.querySelector('#notes-container').addEventListener('click', enableEdit);
 //listen for cancel edit state
 document.querySelector('#notes-container').addEventListener('click', cancelEdit);
-//listen of submit changes
+//listen for submit changes
 document.querySelector('#notes-container').addEventListener('click', submitEdit);
+//listen for delete note
+document.querySelector('#notes-container').addEventListener('click', deleteNote);
 
 
 function getNotes(){
@@ -124,5 +126,26 @@ function submitEdit(e){
                 getNotes();
             })
             .catch(err => console.log(err));  
+    }
+}
+
+
+function deleteNote(e){
+    if(e.target.parentElement.parentElement.classList.contains('delete-note')){
+
+        const idContainer = e.target.parentElement.parentElement;
+        const id = idContainer.dataset.id;
+
+        if(confirm('Are you sure?')){
+
+            http.delete(`http://localhost:3000/notes/${id}`)
+            .then(() => {
+                ui.showAlert('Note deleted successfully', 'notification is-danger');
+                getNotes();
+            })
+            .catch(err => console.log(err));  
+        }
+
+        e.preventDefault();
     }
 }
