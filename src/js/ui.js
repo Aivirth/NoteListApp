@@ -123,22 +123,16 @@ class UI{
 
     //remove current buttons in the card state and return card header
     clearBtns(noteID){
-        //get current card elements
-        let cardElements = document.getElementById(`note-${noteID}`).children;
-        //convert elements to array
-        cardElements = Array.from(cardElements);
 
-        //get the header of the card
-        let header = cardElements[0];
+        const card = document.getElementById(`note-${noteID}`);
+        const cardID = card.id;
+        const header = document.querySelector(`#note-${noteID} > header.card-header`);
+        const currentBtns = document.querySelectorAll(`#${cardID} a.card-header-icon`);
 
-        //get header elements
-        let headerElements = header.children;
-        //convert elements to array
-        headerElements = Array.from(headerElements);
-
-        //remove add state btn
-        let firstBtn = headerElements[1].remove();
-        let secondBtn = headerElements[2].remove();
+        //remove current State buttons
+        currentBtns.forEach(btn => {
+            header.removeChild(btn);
+        });
 
         return header;
     }
