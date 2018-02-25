@@ -14,6 +14,41 @@ document.querySelector('#notes-container').addEventListener('click', cancelEdit)
 document.querySelector('#notes-container').addEventListener('click', submitEdit);
 //listen for delete note
 document.querySelector('#notes-container').addEventListener('click', deleteNote);
+//listen for delete All notes
+document.querySelector(".delete-all").addEventListener('click', deleteAllNotes);
+
+
+function deleteAllNotes(e){
+    let cards = document.querySelectorAll('.note-card');
+    cards = Array.from(cards);
+    
+    if(confirm('Are you Sure?')){
+        cards.forEach(card => {
+            let cardID = card.id;
+            cardID = cardID.split('-');
+            cardID = cardID[1];
+
+            http.delete(`http://localhost:3000/notes/${cardID}`)
+                .then(() => {
+                    getNotes();
+                })
+                .catch(err => console.log(err));  
+
+            ui.showAlert('Notes deleted successfully', 'notification is-danger');
+            
+        });
+
+       
+        
+    }
+    
+    
+   
+
+    
+
+    e.preventDefault();
+}
 
 
 function getNotes(){
