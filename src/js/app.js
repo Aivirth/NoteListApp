@@ -96,6 +96,7 @@ function submitEdit(e){
         const titleContainer = idContainer.previousElementSibling;
         const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
         const authorContainer = idContainer.parentElement.nextElementSibling.nextElementSibling.children[0];
+        const authorName = authorContainer.children[0];
 
         const dataContainers = {
             idContainer,
@@ -103,11 +104,13 @@ function submitEdit(e){
             bodyContainer,
             authorContainer
         }
+
+        
         
         const id = idContainer.dataset.id;
         const title = titleContainer.firstElementChild.value;
         const body = bodyContainer.firstElementChild.value;
-        const author = authorContainer.textContent;
+        const author = authorName.textContent;
 
         const data = {
             id, title, body, author

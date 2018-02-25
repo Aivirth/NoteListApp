@@ -27,7 +27,7 @@ class UI{
                         <div class="content">${note.body}</div>
                     </div>
                     <footer class="card-footer has-text-grey has-text-left">
-                        <p class="note-author card-footer-item">By: ${note.author}</p>
+                        <p class="note-author card-footer-item">By: <span class="card-author-name">${note.author}</span></p>
                     </footer>
                 </div>
             </li>
