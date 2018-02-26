@@ -22,24 +22,38 @@ function deleteAllNotes(e){
     let cards = document.querySelectorAll('.note-card');
     cards = Array.from(cards);
     
-    if(confirm('Are you Sure?')){
-        cards.forEach(card => {
-            let cardID = card.id;
+    //map ids on array
+    const notesIDs = cards.map((card)=>{
+        let cardID = card.id;
             cardID = cardID.split('-');
             cardID = cardID[1];
+            return cardID;
+    });
 
-            http.delete(`http://localhost:3000/notes/${cardID}`)
-                .then((res) => { console.log(res) })
-                .catch(err => console.log(err));
-        });     
-        
-    }
-    
-    location.reload();
-    ui.showAlert('Notes deleted successfully', 'notification is-danger');
-    
+    deleteIterator(notesIDs)
+        .then(ui.showAlert('Notes deleted successfully', 'notification is-danger'))
+        .then(getNotes)
+        .catch(err => console.log(err));
 
     e.preventDefault();
+}
+
+function deleteIterator(notesIDs){
+
+    return new Promise((resolve, reject)=>{
+        let index = 0;  
+        while(index < notesIDs.length){
+            
+            http.delete(`http://localhost:3000/notes/${notesIDs[index]}`)
+                    .then((res) => { console.log(res) })
+                    .catch(err => console.log(err));            
+            index++;
+        }
+        resolve();
+
+    }); 
+
+
 }
 
 
