@@ -89,10 +89,11 @@ function addNote(){
 function enableEdit(e){
     
     if(e.target.parentElement.parentElement.classList.contains('edit-note')){
-        const idContainer = e.target.parentElement.parentElement;
-        const titleContainer = idContainer.previousElementSibling;
-        const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
-        const authorContainer = idContainer.parentElement.nextElementSibling.nextElementSibling.children[0];
+        const currentNote = e.target.parentElement.parentElement.parentElement.parentElement;
+        const idContainer = currentNote.querySelector('.edit-note');
+        const titleContainer = currentNote.querySelector('.card-header-title');
+        const bodyContainer = currentNote.querySelector('.content');
+        const authorContainer = currentNote.querySelector('.note-author');
 
         const dataContainers = {
             idContainer,
@@ -110,10 +111,11 @@ function enableEdit(e){
 function cancelEdit(e){
     if(e.target.parentElement.parentElement.classList.contains('cancel-operation')){
 
-        const idContainer = e.target.parentElement.parentElement;
-        const titleContainer = idContainer.previousElementSibling.previousElementSibling;
-        const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
-        const authorContainer = idContainer.parentElement.nextElementSibling.nextElementSibling.children[0];
+        const currentNote = e.target.parentElement.parentElement.parentElement.parentElement;
+        const idContainer = currentNote.querySelector('.cancel-operation');
+        const titleContainer = currentNote.querySelector('.card-header-title');
+        const bodyContainer = currentNote.querySelector('.content');
+        const authorContainer = currentNote.querySelector('.note-author');
 
         const dataContainers = {
             idContainer,
@@ -135,20 +137,12 @@ function submitEdit(e){
     e.preventDefault();
     if(e.target.parentElement.parentElement.classList.contains('confirm-operation')){
 
-        const idContainer = e.target.parentElement.parentElement;
-        const titleContainer = idContainer.previousElementSibling;
-        const bodyContainer = idContainer.parentElement.nextElementSibling.children[0];
-        const authorContainer = idContainer.parentElement.nextElementSibling.nextElementSibling.children[0];
-        const authorName = authorContainer.children[0];
-
-        const dataContainers = {
-            idContainer,
-            titleContainer,
-            bodyContainer,
-            authorContainer
-        }
-
-        
+        const currentNote = e.target.parentElement.parentElement.parentElement.parentElement;
+        const idContainer = currentNote.querySelector('.cancel-operation');
+        const titleContainer = currentNote.querySelector('.card-header-title');
+        const bodyContainer = currentNote.querySelector('.content');
+        const authorContainer = currentNote.querySelector('.note-author');
+        const authorName = currentNote.querySelector('.note-author').querySelector('.card-author-name');                
         
         const id = idContainer.dataset.id;
         const title = titleContainer.firstElementChild.value;
